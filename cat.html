@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Silly Car</title>
+</head>
+<body>
+    <div class="car">
+        <div class="ears">
+            <div class="ear1"></div>
+            <div class="ear2"></div>
+        </div>
+   
+    
+        <div class="head">
+            
+            <div class="eye1">
+                <div class="eyee1"></div>
+            </div>
+            <div class="eye2">
+                <div class="eyee1"></div>
+            </div>
+
+            <div class="nose"></div>
+            
+        </div>
+        <div class="bow"></div>
+        <div class="bd">
+            <div class="bodie"></div>
+            <div class="tail"></div>
+        </div>
+        
+        <div class="legs">
+            <div class="leg"></div>
+            <div class="leg"></div>
+        </div>
+        
+
+
+    </div>
+
+    <div id="taap"></div>
+
+    <script>
+        document.addEventListener('mousemove', function(e) {
+          var taap = document.getElementById('taap');
+          var x = e.clientX;
+          var y = e.clientY;
+          
+          
+          taap.style.left = x + 'px';
+          taap.style.top = y + 'px';
+        });
+    </script>
+
+
+    <script>
+    class PupilFollowCursor {
+      constructor(eyeSelector, pupilSelector) {
+        this.eye = document.querySelector(eyeSelector);
+        this.pupil = this.eye.querySelector(pupilSelector);
+        this.eyeCenterX = this.eye.offsetLeft + this.eye.offsetWidth / 2;
+        this.eyeCenterY = this.eye.offsetTop + this.eye.offsetHeight / 2;
+    
+        this.attachMouseMoveListener();
+      }
+    
+      attachMouseMoveListener() {
+        document.addEventListener('mousemove', (e) => this.movePupil(e));
+      }
+    
+      movePupil(e) {
+        
+        const angle = Math.atan2(e.clientY - this.eyeCenterY, e.clientX - this.eyeCenterX);
+    
+        
+        const maxRadius = (this.eye.offsetWidth - this.pupil.offsetWidth) / 2;
+    
+        
+        const newX = maxRadius * Math.cos(angle);
+        const newY = maxRadius * Math.sin(angle);
+    
+    
+        this.pupil.style.transform = `translate(${newX}px, ${newY}px)`;
+      }
+    }
+    
+    
+    const pupilFollowCursor1 = new PupilFollowCursor('.eye1', '.eyee1');
+    const pupilFollowCursor2 = new PupilFollowCursor('.eye2', '.eyee1');
+    
+    </script>
+
+
+    
+</body>
+</html>
